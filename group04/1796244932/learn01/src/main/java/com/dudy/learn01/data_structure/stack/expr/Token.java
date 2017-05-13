@@ -1,4 +1,4 @@
-package com.dudy.learn01.data_structure.queue.expr;
+package com.dudy.learn01.data_structure.stack.expr;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;

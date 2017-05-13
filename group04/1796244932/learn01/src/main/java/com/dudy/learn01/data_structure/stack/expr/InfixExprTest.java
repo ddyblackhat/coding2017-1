@@ -1,4 +1,4 @@
-package com.dudy.learn01.data_structure.queue.expr;
+package com.dudy.learn01.data_structure.stack.expr;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
