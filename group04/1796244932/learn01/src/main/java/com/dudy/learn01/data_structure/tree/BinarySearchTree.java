@@ -1,6 +1,10 @@
 package com.dudy.learn01.data_structure.tree;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class BinarySearchTree<T extends Comparable> {
 
@@ -80,13 +84,13 @@ public class BinarySearchTree<T extends Comparable> {
         if (compareResult > 0) {
             t.right = remove(e, t.right);
         } else if (compareResult < 0) {
-            t.left   = remove(e, t.left);
+            t.left = remove(e, t.left);
         } else {
             if (t.left != null && t.right != null) {
                 t.data = findMin(t.right).data;
                 t.right = remove(t.data, t.right);
             } else {
-                 t = (t.left != null) ? t.left: t.right;
+                t = (t.left != null) ? t.left : t.right;
             }
         }
 
@@ -94,19 +98,90 @@ public class BinarySearchTree<T extends Comparable> {
     }
 
 
-    public List<T> levelVisit(){
+    public List<T> levelVisit() {
+        List<T> result = new ArrayList<T>();
+        Queue<BinaryTreeNode<T>> queue = new LinkedBlockingQueue<BinaryTreeNode<T>>();
+        if (root != null) {
+            queue.add(root);
+            while (!queue.isEmpty()) {
+                BinaryTreeNode<T> node = queue.remove();
+                result.add(node.data);
+                if (node.left != null) {
+                    queue.add(node.left);
+                }
 
-        return null;
+                if (node.right != null) {
+                    queue.add(node.right);
+                }
+
+            }
+        }
+
+        return result;
     }
-    public boolean isValid(){
-        return false;
+
+    public boolean isValid() {
+        return isValid(root,Integer.MIN_VALUE,Integer.MAX_VALUE);
     }
-    public T getLowestCommonAncestor(T n1, T n2){
-        return null;
+
+    private boolean isValid(BinaryTreeNode<T> r, Integer min, Integer max) {
+        if (r == null) {
+            return  true;
+        }
+
+        if(r.data.compareTo(min) <= 0 ||
+                r.data.compareTo(max) >=0  ){
+            return  false;
+        }
+        return isValid(r.left,min,(Integer) r.data) && isValid(r.right,(Integer) r.data,max);
+    }
+
+    public T getLowestCommonAncestor(T n1, T n2) {
+        return getLowestCommonAncestor(root,n1,n2);
 
     }
-    public List<T> getNodesBetween(T n1, T n2){
-        return null;
+
+    // https://github.com/julycoding/The-Art-Of-Programming-By-July/blob/master/ebook/zh/03.03.md
+    private T getLowestCommonAncestor(BinaryTreeNode<T> r, T n1, T n2) {
+        while (true){
+            if(r.data.compareTo(n2) >=0 ){
+                r = r.left;
+            } else  if (r.data.compareTo(n1) <= 0){
+                r = r.right;
+            } else {
+                return r.data;
+            }
+        }
+
+
+
+
+    }
+
+    public List<T> getNodesBetween(T n1, T n2) {
+
+        List<T>  result = new ArrayList<T>();
+
+        Queue<BinaryTreeNode<T>>  queue =  new LinkedBlockingQueue<BinaryTreeNode<T>>();
+        queue.add(root);
+        while (!queue.isEmpty()){
+            BinaryTreeNode<T> node = queue.remove();
+            if(node.data.compareTo(n1) >=0 &&
+                    node.data.compareTo(n2) <=0){
+                result.add(node.data);
+            }
+            if(node.left != null){
+                queue.add(node.left);
+            }
+            if(node.right != null){
+                queue.add(node.right);
+            }
+
+        }
+
+
+
+        return result;
     }
 
 
