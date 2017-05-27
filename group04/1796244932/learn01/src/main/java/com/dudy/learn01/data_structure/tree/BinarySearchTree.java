@@ -1,5 +1,7 @@
 package com.dudy.learn01.data_structure.tree;
 
+import java.util.List;
+
 public class BinarySearchTree<T extends Comparable> {
 
     BinaryTreeNode<T> root;
@@ -89,6 +91,22 @@ public class BinarySearchTree<T extends Comparable> {
         }
 
         return t;
+    }
+
+
+    public List<T> levelVisit(){
+
+        return null;
+    }
+    public boolean isValid(){
+        return false;
+    }
+    public T getLowestCommonAncestor(T n1, T n2){
+        return null;
+
+    }
+    public List<T> getNodesBetween(T n1, T n2){
+        return null;
     }
 
 

@@ -22,6 +22,12 @@ public class BinarySearchTreeTest {
 		root.left.right = new BinaryTreeNode<Integer>(4);
 		root.left.right.left = new BinaryTreeNode<Integer>(3);
 		tree = new BinarySearchTree<Integer>(root);
+		/**
+		 *      6
+		 *    2    8
+		 *  1   4
+		 *    3
+		 */
 	}
 
 	@After
